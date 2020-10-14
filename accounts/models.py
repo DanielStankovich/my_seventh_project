@@ -1,5 +1,4 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import UserManager
 from django.db import models
 
 
@@ -22,7 +21,8 @@ class MyUserManager(BaseUserManager):
 
     def create_superuser(self, email, password=None):
         """
-        Creates and saves a superuser with the given email, password.
+        Creates and saves a superuser with the given email, date of
+        birth and password.
         """
         user = self.create_user(
             email,
@@ -43,8 +43,8 @@ class MyUser(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     city = models.ForeignKey('scraping.City', on_delete=models.SET_NULL,
                              null=True, blank=True)
-    Language = models.ForeignKey('scraping.Language', on_delete=models.SET_NULL,
-                             null=True, blank=True)
+    language = models.ForeignKey('scraping.Language', on_delete=models.SET_NULL,
+                                 null=True, blank=True)
     send_email = models.BooleanField(default=True)
 
     objects = MyUserManager()
