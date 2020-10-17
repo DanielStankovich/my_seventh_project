@@ -29,6 +29,7 @@ def register_view(request):
         new_user = form.save(commit=False)
         new_user.set_password(form.cleaned_data['password'])
         new_user.save()
+        messages.success(request, 'Пользователь добавлен в систему.')
         return render(request, 'accounts/register_done.html',
                       {'new_user': new_user})
     return render(request, 'accounts/register.html', {'form': form})
@@ -63,4 +64,5 @@ def delete_view(request):
         if request.method == 'POST':
             qs = User.objects.get(pk=user.pk)
             qs.delete()
+            messages.success(request, 'Пользователь удален.')
     return redirect('home')
