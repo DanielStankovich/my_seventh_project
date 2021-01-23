@@ -6,6 +6,7 @@ from scraping.models import City, Language
 
 User = get_user_model()
 
+
 class UserLoginForm(forms.Form):
     email = forms.CharField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
@@ -26,13 +27,13 @@ class UserLoginForm(forms.Form):
         return super(UserLoginForm, self).clean(*args, **kwargs)
 
 
-class UserRegisterationForm(forms.ModelForm):
+class UserRegistrationForm(forms.ModelForm):
     email = forms.EmailField(label='Введите имэйл',
                              widget=forms.EmailInput(attrs={'class': 'form-control'}))
     password = forms.CharField(label='Введите пароль',
-                             widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    password2 = forms.CharField(label='Введите пароль ещё раз',
                                widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='Введите пароль ещё раз',
+                                widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = User
@@ -63,3 +64,18 @@ class UserUpdateForm(forms.Form):
     class Meta:
         models = User
         fields = ('city', 'language', 'send_email')
+
+
+class ContactForm(forms.Form):
+    city = forms.CharField(
+        required=True, widget=forms.TextInput(attrs={'class': 'form-control'}),
+        label='Город'
+    )
+    language = forms.CharField(
+        required=True, widget=forms.TextInput(attrs={'class': 'form-control'}),
+        label='Специальность'
+    )
+    email = forms.EmailField(
+        label='Введите имэйл', required=True, widget=forms.EmailInput(
+            attrs={'class': 'form-control'})
+    )
