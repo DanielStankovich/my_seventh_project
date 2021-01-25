@@ -1,0 +1,8 @@
+@font-face {
+    font-family: Jua;
+    src: url(../fonts/Jua-Regular.ttf);
+}
+#brand {
+    font-family: Jua;
+    color: #FFF;
+}
